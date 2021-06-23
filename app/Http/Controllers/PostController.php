@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::get();
-        return response()->json('posts',$posts);
+        $posts = Post::get()->toArray();
+        $message= [
+            'message'=> 'success',
+            'result' => $posts
+        ] ;
+
+        return response()->json($message);
     }
 
     public function store(Request $request)
@@ -30,7 +35,7 @@ class PostController extends Controller
 
     public function show($post_id)
     {
-        $post = Post::find($post_id)->with('comments');
+        $post = Post::with('comments')->find($post_id);
         $message= [
             'message'=> 'success',
             'result' => $post
