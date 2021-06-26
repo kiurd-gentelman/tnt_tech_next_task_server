@@ -16,18 +16,30 @@ class PostController extends Controller
 
         return response()->json($message);
     }
+    public function userPost(){
+        $posts = Post::where('author_id' , auth()->id())
+            ->get()
+            ->toArray();
+        $message= [
+            'message'=> 'success',
+            'result' => $posts
+        ] ;
+
+        return response()->json($message);
+    }
 
     public function store(Request $request)
     {
         $insert = $request->validate([
-            'title'=>'require',
-            'description'=>'require',
+            'title'=>'required',
+            'description'=>'required',
         ]);
+//        return $insert;
 
         $insert = Post::create($insert + ['author_id'=>auth()->id()]);
         $message= [
             'message'=> 'success',
-            'result' => $insert
+            'status' => 200
         ] ;
 
         return response()->json($message,200);

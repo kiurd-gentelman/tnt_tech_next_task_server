@@ -27,6 +27,8 @@ Route::get('/post-show/{id}', [PostController::class , 'show']);
 Route::middleware(['api','auth:api'])->group(function () {
     // Get user info
     Route::get('/user', [LoginController::class ,'user']);
+    Route::get('/user-post', [PostController::class ,'userPost']);
+    Route::post('/post-create', [PostController::class ,'store']);
     // Logout user from application
-    Route::post('/logout', 'Auth/LoginController@logout');
+//    Route::post('/logout', [LoginController::class .'logout']);
 });
