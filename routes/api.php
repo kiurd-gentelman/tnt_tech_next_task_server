@@ -29,6 +29,8 @@ Route::middleware(['api','auth:api'])->group(function () {
     Route::get('/user', [LoginController::class ,'user']);
     Route::get('/user-post', [PostController::class ,'userPost']);
     Route::post('/post-create', [PostController::class ,'store']);
+    Route::post('/post-update/{id}', [PostController::class ,'update']);
+    Route::get('/post-delete/{id}', [PostController::class ,'delete']);
     // Logout user from application
 //    Route::post('/logout', [LoginController::class .'logout']);
 });
