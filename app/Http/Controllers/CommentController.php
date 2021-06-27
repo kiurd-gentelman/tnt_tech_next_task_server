@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function store(Request $request){
+//        return $request->all();
         $insert = $request->validate([
-            'comments' => 'require',
-            'post_id' => 'require',
-            'user_id' => 'require',
+            'comments' => 'required',
+            'post_id' => 'required',
         ]);
 
-        $insert = Comments::create($insert);
+        $insert = Comments::create($insert + ['user_id'=>auth()->id()]);
         $message= [
             'message'=> 'success',
             'result' => $insert
@@ -50,8 +50,8 @@ class CommentController extends Controller
     }
 
     public function delete($comment_id){
-        $insert = Comments::find($comment_id);
-        $insert->delete();
+        $comment = Comments::find($comment_id);
+        $comment->delete();
 
         $message= [
             'message'=> 'success',
