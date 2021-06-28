@@ -30,6 +30,7 @@ Route::middleware(['api','auth:api'])->group(function () {
     // Get user info
     Route::get('/user', [LoginController::class ,'user']);
     Route::get('/user-list', [UserController::class ,'userList']);
+    Route::get('/user-profile/{id}', [UserController::class ,'userProfile']);
     Route::post('/user/order-list', [UserController::class ,'userOrderList']);
     Route::post('/user/search', [UserController::class ,'userSearch']);
     Route::get('/user-post', [PostController::class ,'userPost']);

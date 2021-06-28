@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::get()->toArray();
+        $posts = Post::with('user')->get()->toArray();
         $message= [
             'message'=> 'success',
             'result' => $posts

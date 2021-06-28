@@ -39,4 +39,13 @@ class UserController extends Controller
         ] ;
         return response()->json($message,200);
     }
+
+    public function userProfile($id){
+        $user = User::with('post')->find($id);
+        $message= [
+            'message'=> 'success',
+            'result' => $user
+        ] ;
+        return response()->json($message,200);
+    }
 }

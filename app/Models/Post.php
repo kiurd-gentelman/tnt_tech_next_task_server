@@ -13,4 +13,7 @@ class Post extends Model
     public function comments(){
         return $this->hasMany(Comments::class,'post_id','id');
     }
+    public function user(){
+        return $this->hasOne(User::class , 'id' , 'author_id');
+    }
 }
